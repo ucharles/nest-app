@@ -1,73 +1,42 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# NestJS!
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+컨트롤러: URL을 가져오고 함수를 실행함.<br/>
+express의 라우터 같은 것..<br/>
+NestJS는 컨트롤로와 비즈니스 로직을 분리, 구분짓고 싶어함.<br/>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+서비스는 비즈니스 로직을 실행하는 곳.<br/>
+함수의 구현부가 존재.<br/>
 
-## Description
+무언가 필요하면 우리가 요청해야함.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+put: 전체 내용을 업데이트할때 필요
+patch: 일부 내용을 업데이트 할때
 
-## Installation
+express.js에서 body를 json으로 리턴하려면 설정이 필요함.<br/>
+NestJS는 필요가 없다.<br/>
 
-```bash
-$ npm install
-```
+get의 순서를 주의할 것..<br/>
+get search가 get id보다 아래에 있으면<br/>
+get search를 id로 인식함<br/>
 
-## Running the app
+Single-responsibility principle<br/>
+하나의 모듈, 클래스 혹은 함수가 하나의 기능은 꼭 책임져야 한다.<br/>
 
-```bash
-# development
-$ npm run start
+DTO를 사용하려고 main.ts에 useGlobalPipes를 넣으면...<br/>
+ERROR [ExceptionsHandler] classTransformer.plainToClass is not a function<br/>
+{<br/>
+"statusCode": 500,<br/>
+"message": "Internal server error"<br/>
+}<br/>
 
-# watch mode
-$ npm run start:dev
+이게 무엇인고...ㅠㅠ<br/>
 
-# production mode
-$ npm run start:prod
-```
+함수명이 바뀌었다고 한다... 이런 xx (2021/11/21 바로 어제)<br/>
+[변경사항](https://github.com/typestack/class-transformer/blob/develop/CHANGELOG.md)
 
-## Test
+- classToPlain -> instanceToPlain<br/>
+- plainToClass -> plainToInstance<br/>
+- classToClass -> instanceToInstance<br/>
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+다운그레이드 하자 [nest js issue](https://github.com/nestjs/nest/issues/8637)
+npm install class-transformer@0.4.0
