@@ -3,7 +3,7 @@ import { CreateMovieDto } from './dto/create-movie.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Movie } from './entities/movie.entity';
 
-@Injectable()
+@Injectable() // Dependency Injection
 export class MoviesService {
   private movies: Movie[] = [];
 

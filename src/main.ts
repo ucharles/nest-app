@@ -11,6 +11,6 @@ async function bootstrap() {
       transform: true,
     }),
   ); // 유효성 검사
-  await app.listen(3001);
+  await app.listen(3000);
 }
 bootstrap();
